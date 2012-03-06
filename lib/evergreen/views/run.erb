@@ -31,6 +31,23 @@
 
 <script type="text/javascript">
   // <![CDATA[
+
+    //IDEA_URI = "http://localhost:8091/?message=";
+    IDEA_URI = "<%= Evergreen.editor_url %>";
+    // Find urls and convert to links
+    function replaceURLWithHTMLLinks(text) {
+      // Get the path up to the first dot before the file extension
+      var exp = /(\b(https?|ftp|file):\/\/127\.0\.0\.1:3000\/assets\/([-A-Z0-9+&@#\/%?=~_|!:,;]*))/ig;
+      return text.replace(exp,"<a href='javascript:$.get(\""+IDEA_URI+"$3.coffee\")' target='_blank'>$3</a>");
+    }
+    // Linkify urls
+    $( 'body' ).bind("jasmine:complete", function() {
+      $(".stackTrace").each(function(i){
+        var text = $(this).html();
+        $(this).html(replaceURLWithHTMLLinks(text));
+      });
+    });
+
     (function() {
       Evergreen.driver = <%= Evergreen.driver.to_json %>;
       <% @suite.templates.each do |template| %>
@@ -48,6 +65,7 @@
       else {
         window.attachEvent("onload", jasmineExecute);
       }
+
     })();
   // ]]>
 </script>

@@ -15,7 +15,7 @@ module Evergreen
   autoload :Template, 'evergreen/template'
 
   class << self
-    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at, :application
+    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at, :application, :editor_url
 
     def configure
       yield self
@@ -29,6 +29,8 @@ module Evergreen
         config.spec_dir = 'spec/javascripts'
         config.template_dir = 'spec/javascripts/templates'
         config.mounted_at = ""
+        # TODO: Add prefix
+        config.editor_url = 'http://127.0.0.1:8091/?message='
       end
     end
   end

@@ -37,8 +37,8 @@
     // Find urls and convert to links
     function replaceURLWithHTMLLinks(text) {
       // Get the path up to the first dot before the file extension
-      var exp = /(\b(https?|ftp|file):\/\/127\.0\.0\.1:3000\/assets\/([-A-Z0-9+&@#\/%?=~_|!:,;]*))/ig;
-      return text.replace(exp,"<a href='javascript:$.get(\""+IDEA_URI+"$3.coffee\")' target='_blank'>$3</a>");
+      var exp = /(\b(https?|ftp|file):\/\/127\.0\.0\.1:3000\/(assets|evergreen\/run)\/([-A-Z0-9+&@#\/%?=~_|!:,;]*))/ig;
+      return text.replace(exp,"<a href='javascript:$.get(\""+IDEA_URI+"$4.coffee\")' target='_blank'>$4</a>");
     }
     // Linkify urls
     $( 'body' ).bind("jasmine:complete", function() {
